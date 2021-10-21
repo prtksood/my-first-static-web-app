@@ -30,8 +30,10 @@
         }
         loadScript("https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js", function () {
             $("#btnRegister").click(function () {
-                const { text } = await( await fetch(`/api/InviteUser`)).json();
-                document.getElementById('content').innerHTML = text;
+                (async function() {
+                    const { text } = await( await fetch(`/api/InviteUser`)).json();
+                    document.getElementById('content').innerHTML = text;
+                }())   
             });           
         });
     </script>
