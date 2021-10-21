@@ -31,8 +31,9 @@
         loadScript("https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js", function () {
             $("#btnRegister").click(function () {
                 (async function() {
-                    const { text } = await( await fetch(`/api/InviteUser`)).json();
-                    document.getElementById('content').innerHTML = text;
+                    //const { text } = await( await fetch(`/api/InviteUser`)).json();
+                    const { inviteResponse } = await fetch(`/api/InviteUser`);
+                    document.getElementById('content').innerHTML = "Invitation sent with ID: " + inviteResponse.id;
                 }())   
             });           
         });

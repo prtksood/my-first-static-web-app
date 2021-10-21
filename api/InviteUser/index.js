@@ -11,9 +11,17 @@
 //         body: responseMessage
 //     };
 // }
-
+require('dotenv').config();
+const fetch = require('./fetch');
+const auth = require('./auth');
 module.exports = async function (context, req) {
-    context.res.json({
-        text: "API called"
-    });
+    const authResponse = await auth.getToken(auth.tokenRequest);
+    const guestInvite = await fetch.callApi(auth.apiConfig.uri, authResponse.accessToken);
+    // context.res.json({
+    //     text: "API called"
+    // });
+    context.res = {
+    // status: 200, /* Defaults to 200 */
+    body: guestInvite
+    };
 };
