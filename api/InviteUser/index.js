@@ -11,9 +11,11 @@
 //         body: responseMessage
 //     };
 // }
-require('dotenv').config();
-const fetch = require('./fetch');
-const auth = require('./auth');
+
+
+// require('dotenv').config();
+// const fetch = require('./fetch');
+// const auth = require('./auth');
 // module.exports = async function (context, req) {
 //     context.log('JavaScript HTTP trigger function processed a request.');
 //     const authResponse = await auth.getToken(auth.tokenRequest);

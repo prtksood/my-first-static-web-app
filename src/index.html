@@ -34,7 +34,7 @@
                     //const { inviteID } = await( await fetch(`/api/InviteUser`)).json();
                     //const { inviteResponse } = await fetch(`/api/InviteUser`);
                     const { text } = await( await fetch(`/api/InviteUser`)).json();
-                    document.getElementById('content').innerHTML = "Invitation sent with ID: " + inviteID;
+                    document.getElementById('content').innerHTML = "Invitation sent with ID: " + text;
                 }())   
             });           
         });
