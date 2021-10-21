@@ -15,8 +15,11 @@ require('dotenv').config();
 const fetch = require('./fetch');
 const auth = require('./auth');
 module.exports = async function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
     const authResponse = await auth.getToken(auth.tokenRequest);
+    context.log(authResponse);
     const guestInvite = await fetch.callApi(auth.apiConfig.uri, authResponse.accessToken);
+    context.log(guestInvite);
     context.res.json({
         inviteID: guestInvite.id
     });
