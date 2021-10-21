@@ -29,41 +29,15 @@
             document.getElementsByTagName("head")[0].appendChild(script);
         }
         loadScript("https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js", function () {
-            $("#btnGetToken").click(function () {
-                $.ajax({  
-            "async": true,  
-            "crossDomain": true,  
-            "url": "https://login.microsoftonline.com/casestudydev.onmicrosoft.com/oauth2/v2.0/token", // Pass your tenant name instead of sharepointtechie    
-            "method": "POST",  
-            "headers": {  
-                "content-type": "application/x-www-form-urlencoded", 
-            },  
-            "data": {  
-                "grant_type": "client_credentials",  
-                "client_id ": "0533c5d8-6549-4537-8752-0559181a2153", //Provide your app id    
-                "client_secret": "LCO7Q~za9DkpcorvPHU60k3XHup8T1GLXTh1n", //Provide your client secret genereated from your app
-                "scope ": "https://graph.microsoft.com/.default"  
-            },  
-            success: function(response) {  
-                console.log(response);  
-                token = response.access_token;
-                document.getElementById('content').innerHTML = token;
-            },
-            error: function(error) {
-                    alert(JSON.stringify(error));
-                    console.log(JSON.stringify(error));
-                }
-  
-        })
-
-
-            });
-            
+            $("#btnRegister").click(function () {
+                const { text } = await( await fetch(`/api/InviteUser`)).json();
+                document.getElementById('content').innerHTML = text;
+            });           
         });
     </script>
 </head>
 <body>
-    <input type="button" id="btnGetToken" value="Get Token" />
-    <p>Token: </p><p id="content"></p>
+    <input type="button" id="btnRegister" value="Register" />
+    <p>Registration ID: </p><p id="content">Nothing yet...</p>
 </body>
 </html>
