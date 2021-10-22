@@ -32,6 +32,7 @@
             $("#btnRegister").click(function () {
                 (async function() {
                     const { inviteID } = await( await fetch(`/api/InviteUser`)).json();
+                    alert("Registered Successfully");
                     document.getElementById('content').innerHTML = "Invitation sent with ID: " + inviteID;
                 }())   
             });           
@@ -39,7 +40,8 @@
     </script>
 </head>
 <body>
+    <input type="text" id="txtEmail" placeholder="Enter your email id" />
     <input type="button" id="btnRegister" value="Register" />
-    <p>Registration ID: </p><p id="content">Nothing yet...</p>
+    <p id="content">Registration ID will appear here after successful registration</p>
 </body>
 </html>
