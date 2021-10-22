@@ -40,8 +40,8 @@ module.exports = async function (context, req) {
     //invite user to tenant
     const response = await axios.default.post(apiConfig.inviteuri, invitation, options);
     const guestInvite =  response.data;
-    //add 5 second delay to ensure user id could be fetched afterwards
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    //add 10 second delay to ensure user id could be fetched afterwards
+    await new Promise(resolve => setTimeout(resolve, 10000));
     //get guest user id by email
     const userResponse = await axios.default.get(apiConfig.getuserbymailuri.replace("@","_") + extSuffix, options);
     const userId = userResponse.data["id"];
