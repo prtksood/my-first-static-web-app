@@ -41,8 +41,7 @@ module.exports = async function (context, req) {
     const response = await axios.default.post(apiConfig.inviteuri, invitation, options);
     const guestInvite =  response.data;
     //add 5 second delay to ensure user id could be fetched afterwards
-    const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
-    await delay(5000)
+    await new Promise(resolve => setTimeout(resolve, 5000));
     //get guest user id by email
     const userResponse = await axios.default.get(apiConfig.getuserbymailuri.replace("@","_") + extSuffix, options);
     const userId = userResponse.data["id"];
