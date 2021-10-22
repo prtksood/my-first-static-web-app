@@ -32,9 +32,9 @@
             $("#btnRegister").click(function () {
                 (async function() {
                     const email = document.getElementById('txtEmail').value;
-                    const { inviteID } = await( await fetch(`/api/InviteUser?email=` +email)).json();
+                    const { inviteID, userId } = await( await fetch(`/api/InviteUser?email=` +email)).json();
                     alert("Registered Successfully");
-                    document.getElementById('content').innerHTML = "Invitation sent with ID: " + inviteID;
+                    document.getElementById('content').innerHTML = "Invitation to user " + userId + " sent with ID: " + inviteID;
                 }())   
             });           
         });

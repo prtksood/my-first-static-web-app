@@ -49,9 +49,10 @@ module.exports = async function (context, req) {
             '@odata.id': 'https://graph.microsoft.com/v1.0/directoryObjects/' + userId
           }
         //add guest to guests group  
-        await axios.default.post(apiConfig.addmembergroupuri, addMember, options);
+        //await axios.default.post(apiConfig.addmembergroupuri, addMember, options);
     }
     context.res.json({
-        inviteID: guestInvite.id
+        inviteID: guestInvite.id,
+        userID: userId
     });
 };
