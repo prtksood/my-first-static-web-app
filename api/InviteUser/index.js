@@ -2,6 +2,8 @@ require('dotenv').config();
 const msal = require('@azure/msal-node');
 const axios = require('axios');
 module.exports = async function (context, req) {
+    // Read incoming data
+    const email = (req.query.email || (req.body && req.body.email));
     const msalConfig = {
         auth: {
             clientId: "afe50edf-6d86-42dd-95a8-b443393beaf4",
@@ -26,7 +28,7 @@ module.exports = async function (context, req) {
     };
 
     const invitation = {
-        invitedUserEmailAddress: 'prtksood@yahoo.co.in',
+        invitedUserEmailAddress: email,
         inviteRedirectUrl: 'https://casestudydev.sharepoint.com/sites/TrainingPortal',
         sendInvitationMessage:true,
         invitedUserMessageInfo: {
