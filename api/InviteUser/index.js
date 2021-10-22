@@ -13,7 +13,7 @@ module.exports = async function (context, req) {
     const tokenRequest = {
         scopes: ['https://graph.microsoft.com/.default'],
     };
-    const extSuffix = "#EXT#@casestudydev.onmicrosoft.com";
+    const extSuffix = "%23EXT%23@casestudydev.onmicrosoft.com";
     const apiConfig = {
         // uri: process.env.GRAPH_ENDPOINT + 'v1.0/users',
         inviteuri: 'https://graph.microsoft.com/v1.0/invitations',
@@ -40,17 +40,14 @@ module.exports = async function (context, req) {
     //invite user to tenant
     const response = await axios.default.post(apiConfig.inviteuri, invitation, options);
     const guestInvite =  response.data;
-    if(guestInvite.id != null){
-        //get guest user id by email
-        const userResponse = await axios.default.get(apiConfig.getuserbymailuri.replace("@","_") + extSuffix, options);
-        const userObject = userResponse.data;
-        const userId = userObject.id;
-        const addMember = {
-            '@odata.id': 'https://graph.microsoft.com/v1.0/directoryObjects/' + userId
-          }
-        //add guest to guests group  
-        //await axios.default.post(apiConfig.addmembergroupuri, addMember, options);
-    }
+    //get guest user id by email
+    const userResponse = await axios.default.get(apiConfig.getuserbymailuri.replace("@","_") + extSuffix, options);
+    const userId = userResponse.data["id"];
+    const addMember = {
+        '@odata.id': 'https://graph.microsoft.com/v1.0/directoryObjects/' + userId
+      }
+    //add guest to guests group  
+    await axios.default.post(apiConfig.addmembergroupuri, addMember, options);
     context.res.json({
         inviteID: guestInvite.id,
         userID: userId
