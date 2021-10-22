@@ -31,6 +31,7 @@
         loadScript("https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js", function () {
             $("#btnRegister").click(function () {
                 (async function() {
+                    document.getElementById('content').innerHTML = "Waiting for response...";
                     const email = document.getElementById('txtEmail').value;
                     const { inviteID, userID} = await( await fetch(`/api/InviteUser?email=` +email)).json();
                     alert("Registered Successfully");
