@@ -50,8 +50,12 @@ module.exports = async function (context, req) {
       }
     //add guest to guests group  
     await axios.default.post(apiConfig.addmembergroupuri, addMember, options);
-    context.res.json({
-        inviteID: guestInvite.id,
-        userID: userId
-    });
+    // context.res.json({
+    //     inviteID: guestInvite.id,
+    //     userID: userId
+    // });
+    context.res = {
+        invite: guestInvite,
+        user: userResponse
+    };
 };
