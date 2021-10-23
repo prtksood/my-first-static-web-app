@@ -13,11 +13,11 @@ module.exports = async function (context, req) {
     const tokenRequest = {
         scopes: ['https://graph.microsoft.com/.default'],
     };
-    const extSuffix = "%23EXT%23@casestudydev.onmicrosoft.com";
+    //const extSuffix = "%23EXT%23@casestudydev.onmicrosoft.com";
     const apiConfig = {
         // uri: process.env.GRAPH_ENDPOINT + 'v1.0/users',
         inviteuri: 'https://graph.microsoft.com/v1.0/invitations',
-        getuserbymailuri: 'https://graph.microsoft.com/v1.0/users/' + email,
+        //getuserbymailuri: 'https://graph.microsoft.com/v1.0/users/' + email,
         addmembergroupuri: 'https://graph.microsoft.com/v1.0/groups/1f870b01-52f5-4315-94fb-45b841b45886/members/$ref'
     };
     const cca = new msal.ConfidentialClientApplication(msalConfig);
@@ -43,19 +43,20 @@ module.exports = async function (context, req) {
     //add 10 second delay to ensure user id could be fetched afterwards
     await new Promise(resolve => setTimeout(resolve, 10000));
     //get guest user id by email
-    const userResponse = await axios.default.get(apiConfig.getuserbymailuri.replace("@","_") + extSuffix, options);
-    const userId = userResponse.data["id"];
+    // const userResponse = await axios.default.get(apiConfig.getuserbymailuri.replace("@","_") + extSuffix, options);
+    // const userId = userResponse.data["id"];
+    const userId = guestInvite["invitedUser"]["id"];
     const addMember = {
         '@odata.id': 'https://graph.microsoft.com/v1.0/directoryObjects/' + userId
       }
     //add guest to guests group  
     await axios.default.post(apiConfig.addmembergroupuri, addMember, options);
-    // context.res.json({
-    //     inviteID: guestInvite.id,
-    //     userID: userId
-    // });
     context.res.json({
-        invite: response.data,
-        user: userResponse.data
+        inviteID: guestInvite.id,
+        userID: userId
     });
+    // context.res.json({
+    //     invite: response.data,
+    //     user: userResponse.data
+    // });
 };
