@@ -36,7 +36,7 @@
                     // const { inviteID, userID} = await( await fetch(`/api/InviteUser?email=` +email)).json();
                     // alert("Registered Successfully");
                     // document.getElementById('content').innerHTML = "Invitation to user " + userID + " sent with ID: " + inviteID;
-                    const { invite, user} = await fetch(`/api/InviteUser?email=` +email);
+                    const { invite, user} = await( await fetch(`/api/InviteUser?email=` +email)).json();
                     alert("Registered Successfully");
                     document.getElementById('content').innerHTML = "Invitation: " + invite + ", User: " + user;
                 }())   
