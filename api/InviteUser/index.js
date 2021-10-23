@@ -54,8 +54,8 @@ module.exports = async function (context, req) {
     //     inviteID: guestInvite.id,
     //     userID: userId
     // });
-    context.res = {
-        invite: guestInvite,
-        user: userResponse
-    };
+    context.res.json({
+        invite: response.data,
+        user: userResponse.data
+    });
 };
